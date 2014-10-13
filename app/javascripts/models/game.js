@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var EventEmitter = require('events').EventEmitter;
 var GAME_STATUS_CHANGE_EVENT = 'game_status_change_event';
+var monster = require('./monster');
 // var appState = require('.././constants/TodoConstant');
 
 
@@ -24,11 +25,25 @@ var uuid = function() {
 // new EventEmitter()
 module.exports = function() {
 	var messages = [];
+	var actor = monster();
 	var GameApp = _.extend(new EventEmitter(), {
 
-		start: function() {
-			GameApp.addMessage("fight start");
-			// while(fight)
+		walk: function() {
+			// var place = ["平原", "沙漠", "森林"]
+			// var message = "走在" + _.shuffle(place)[0];
+			// var fate = _.random(0, 100);
+			// if (fate > 80) {
+			// 	message = "遇到怪物";
+			// }
+			// GameApp.addMessage(message);
+			this.fight();
+		},
+		fight: function() {
+			// body...
+			actor.attack();
+		},
+		getCurrentHp: function() {
+			return actor.getCurrentHp();
 		},
 		addMessage: function(content) {
 			messages.push({
@@ -62,5 +77,9 @@ module.exports = function() {
 		},
 
 	});
+
+	actor.addChangeListener(function(e) {
+		GameApp.addMessage(e.message);
+	})
 	return GameApp;
 }

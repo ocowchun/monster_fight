@@ -2,12 +2,16 @@ var React = require('react');
 var hpBarTemplate = require('.././templates/hp_bar');
 
 var HpBar = React.createClass({
-  render: function() {
+	render: function() {
+		
+		var currentHp = this.props.model.getCurrentHp();
+		// console.log(currentHp);
+		this.props.now = currentHp;
 		this.props.style = {
-			width: '60%'
+			width: currentHp + '%'
 		};
-    return hpBarTemplate.call(this);;
-  }
+		return hpBarTemplate.call(this);;
+	}
 });
 
 module.exports = HpBar;

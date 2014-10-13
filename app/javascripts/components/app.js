@@ -3,7 +3,7 @@ var appTemplate = require('.././templates/app');
 
 var App = React.createClass({
 	btnFightClick: function() {
-		this.props.gameModel.start();
+		this.props.gameModel.walk();
 	},
 	render: function() {
 		return appTemplate.call(this);;
