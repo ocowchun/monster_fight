@@ -1,9 +1,19 @@
 <!-- var MessageList = require('.././components/message_list'); -->
+<!-- var HpBar = require('.././components/hp_bar'); -->
 
-<div>
-	123
-	<MessageList model={this.props.messageModel}></MessageList>
-<button id="btnFight" onClick={this.btnFightClick}>
-	fight
-</button>
+
+<div className="row">
+	
+	<div className="col-md-6">
+		<MessageList model={this.props.messageModel}></MessageList>
+
+	</div>
+	<div className="col-md-6">
+		<HpBar></HpBar>
+		<button id="btnFight" onClick={this.btnFightClick} className="btn btn-primary btn-lg">
+			fight
+		</button>
+
+	</div>
+
 </div>
