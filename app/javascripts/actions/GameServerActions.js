@@ -4,6 +4,7 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var GameServerActions = {
 	receiveGameStatus: function(status) {
+		console.log("fire:receiveGameStatus");
 		AppDispatcher.handleServerAction({
 			type: ActionTypes.RECEIVE_GAME_STATUS,
 			status: status
@@ -12,4 +13,4 @@ var GameServerActions = {
 
 }
 
-module.exports =GameServerActions;
+module.exports = GameServerActions;

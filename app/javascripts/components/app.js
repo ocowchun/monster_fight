@@ -1,9 +1,11 @@
 var React = require('react');
 var appTemplate = require('.././templates/app');
+var GameActions = require('./../actions/GameActions');
+
 
 var App = React.createClass({
 	btnFightClick: function() {
-		this.props.gameModel.walk();
+		GameActions.excuteFight();
 	},
 	render: function() {
 		return appTemplate.call(this);;

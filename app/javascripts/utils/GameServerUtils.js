@@ -10,7 +10,6 @@ function createServer() {
 	var actor = monster();
 	var server = {};
 	server.excuteWalk = function() {
-		// body...
 	}
 	server.excuteFight = function() {
 		var status = actor.attack();

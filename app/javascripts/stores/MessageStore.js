@@ -2,7 +2,7 @@ var _ = require('underscore');
 var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
-var uuid=require('../utils/uuid');
+var uuid = require('../utils/uuid');
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 var messages = [];
@@ -41,9 +41,10 @@ var MessageStore = _.extend(new EventEmitter(), {
 MessageStore.dispatchToken = AppDispatcher.register(function(payload) {
   var action = payload.action;
   var handles = {};
-
-  handles[ActionTypes.PRODUCT_CHANGE] = function() {
-
+  handles[ActionTypes.RECEIVE_GAME_STATUS] = function() {
+    var message = action.status.message;
+    MessageStore.createMessage(message);
+    MessageStore.emitChange();
   };
 
   // switch (action.type) {
@@ -70,9 +71,9 @@ MessageStore.dispatchToken = AppDispatcher.register(function(payload) {
   //   default:
   //     // do nothing
   // }
-  if (handles[action.actionType]) {
+  if (handles[action.type]) {
 
-    handles[action.actionType]();
+    handles[action.type]();
   }
   // This often goes in each case that should trigger a UI change. This store
   // needs to trigger a UI change after every view action, so we can make the
