@@ -34,6 +34,7 @@ module.exports = function() {
 			var e = {}
 			var d = dice();
 			if (d > 50) {
+				
 				e.message = "打倒怪獸";
 			} else {
 				currentHp = currentHp - d;
