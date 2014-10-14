@@ -1,5 +1,6 @@
 <!-- var MessageList = require('.././components/message_list'); -->
 <!-- var HpBar = require('.././components/hp_bar'); -->
+<!-- var LevelBar = require('.././components/level_bar'); -->
 
 
 <div className="row">
@@ -9,6 +10,7 @@
 
 	</div>
 	<div className="col-md-6">
+		<LevelBar></LevelBar>
 		<HpBar model={this.props.gameModel}></HpBar>
 		<button id="btnFight" onClick={this.btnFightClick} className="btn btn-primary btn-lg">
 			移動

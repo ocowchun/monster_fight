@@ -5,12 +5,17 @@ var AppConstants = require('../constants/AppConstants');
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 var currentHp = 100;
+var currentLevel = 1;
+var currentExp = 0;
 
-function updateHp(hp) {
-  currentHp = hp;
+function updateState(currentState) {
+  console.log(currentState);
+  currentHp = currentState.hp;
+  currentLevel = currentState.level;
+  currentExp = currentState.exp;
 }
 
-var HpStore = _.extend(new EventEmitter(), {
+var ActorStore = _.extend(new EventEmitter(), {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -24,19 +29,24 @@ var HpStore = _.extend(new EventEmitter(), {
   },
 
   get: function() {
-    return currentHp;
+    return {
+      "hp": currentHp,
+      "level": currentLevel,
+      "currentExp": currentExp
+    };
   }
 
 
 });
 
-HpStore.dispatchToken = AppDispatcher.register(function(payload) {
+ActorStore.dispatchToken = AppDispatcher.register(function(payload) {
   var action = payload.action;
   var handles = {};
   handles[ActionTypes.RECEIVE_GAME_STATUS] = function() {
-    var currentHp = action.status.currentHp;
-    updateHp(currentHp);
-    HpStore.emitChange();
+    var currentState = action.status.currentState;
+    updateState(currentState);
+
+    ActorStore.emitChange();
   };
 
   if (handles[action.type]) {
@@ -52,4 +62,4 @@ HpStore.dispatchToken = AppDispatcher.register(function(payload) {
 
 });
 
-module.exports = HpStore;
+module.exports = ActorStore;

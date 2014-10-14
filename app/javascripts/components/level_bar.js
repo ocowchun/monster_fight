@@ -1,15 +1,14 @@
 var React = require('react');
-var hpBarTemplate = require('.././templates/hp_bar');
+var levelBarTemplate = require('.././templates/level_bar');
 var ActorStore = require('../stores/ActorStore');
 
 
 function getStateFromStores() {
-	return {
-		hp: ActorStore.get().hp
-	};
+	return ActorStore.get()
+
 }
 
-var HpBar = React.createClass({
+var LevelBar = React.createClass({
 
 
 	getInitialState: function() {
@@ -29,15 +28,13 @@ var HpBar = React.createClass({
 		this.setState(getStateFromStores());
 	},
 	render: function() {
-		var currentHp = this.state.hp;
+		var currentLevel = this.state.level;
 		// var currentHp = 10;//this.props.model.getCurrentHp();
 		// console.log(currentHp);
-		this.props.now = currentHp;
-		this.props.style = {
-			width: currentHp + '%'
-		};
-		return hpBarTemplate.call(this);;
+		this.props.currentLevel = currentLevel;
+
+		return levelBarTemplate.call(this);;
 	}
 });
 
-module.exports = HpBar;
+module.exports = LevelBar;

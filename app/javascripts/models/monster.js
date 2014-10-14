@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var EventEmitter = require('events').EventEmitter;
 var MONSTER_CHANGE_EVENT = 'monster_change_event';
+var Level = require('./level');
 // var appState = require('.././constants/TodoConstant');
 
 
@@ -24,7 +25,9 @@ var uuid = function() {
 // new EventEmitter()
 module.exports = function() {
 	var maxHp = 100,
-		currentHp = 100;
+		currentHp = 100,
+		level = new Level();
+
 	var dice = function() {
 		return _.random(0, 100);
 	};
@@ -36,19 +39,25 @@ module.exports = function() {
 			if (d > 50) {
 
 				e.message = "打倒怪獸";
+				var levelState = level.addExp(Math.floor(d / 10));
+				if (levelState.levelUp) {
+					currentHp = 100;
+					e.message += ",Level UP!";
+				}
 			} else {
 				currentHp = currentHp - d;
 				e.message = "受到攻擊，減少" + d + "hp";
 			}
-			e.currentHp = this.getCurrentHp();
-			console.log(e);
-
+			e.currentState = this.getCurrentState();
 			return e;
 		},
-		getCurrentHp: function() {
-			return currentHp;
+		getCurrentState: function() {
+			return {
+				"hp": currentHp,
+				"level": level.getLevel(),
+				"exp": level.getExp()
+			};
 		},
-
 		emitChange: function(e) {
 			this.emit(MONSTER_CHANGE_EVENT, e);
 		},
