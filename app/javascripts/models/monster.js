@@ -34,13 +34,16 @@ module.exports = function() {
 			var e = {}
 			var d = dice();
 			if (d > 50) {
-				
+
 				e.message = "打倒怪獸";
 			} else {
 				currentHp = currentHp - d;
 				e.message = "受到攻擊，減少" + d + "hp";
 			}
-			this.emitChange(e)
+			e.currentHp = this.getCurrentHp();
+			console.log(e);
+
+			return e;
 		},
 		getCurrentHp: function() {
 			return currentHp;

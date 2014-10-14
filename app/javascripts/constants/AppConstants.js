@@ -5,6 +5,7 @@ module.exports = {
 		SERVER_ACTION: null
 	}),
 	ActionTypes: keyMirror({
-		RECEIVE_GAME_STATUS: null
+		RECEIVE_GAME_STATUS: null,
+		EXCUTE_FIGHT:null
 	})
 }

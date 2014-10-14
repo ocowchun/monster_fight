@@ -1,14 +1,17 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var ActionTypes = AppConstants.ActionTypes;
+var GameServer = require('../utils/GameServerUtils');
 
 var GameActions = {
-	receiveGameStatus: function(status) {
-		AppDispatcher.handleServerAction({
-			type: ActionTypes.RECEIVE_GAME_STATUS,
-			status: status
+	excuteFight: function() {
+		AppDispatcher.handleViewAction({
+			type: ActionTypes.EXCUTE_FIGHT,
 		});
+		GameServer.excuteFight()
 	}
+
+
 }
 
-module.exports =GameActions;
+module.exports = GameActions;
